@@ -44,7 +44,7 @@ class AbstractPropelSqlExctractorTest extends TestCase
         $mock = $builder->getMockForAbstractClass();
         $mock->method('__')->willReturnArgument(0);
         $mock->method('_createInvalidArgumentException')->willReturnCallback(
-            function($m, $c, $p) {
+            function ($m, $c, $p) {
                 return new InvalidArgumentException($m, $c, $p);
             }
         );
@@ -80,7 +80,7 @@ class AbstractPropelSqlExctractorTest extends TestCase
         $reflect = $this->reflect($subject);
 
         $before = PropelSqlExtractorInterface::UP_MIGRATION;
-        $after  = $reflect->_normalizeDirection($before);
+        $after = $reflect->_normalizeDirection($before);
 
         $this->assertEquals($before, $after, 'Valid direction should not have changed.');
     }
@@ -96,7 +96,7 @@ class AbstractPropelSqlExctractorTest extends TestCase
         $reflect = $this->reflect($subject);
 
         $before = PropelSqlExtractorInterface::DOWN_MIGRATION;
-        $after  = $reflect->_normalizeDirection($before);
+        $after = $reflect->_normalizeDirection($before);
 
         $this->assertEquals($before, $after, 'Valid direction should not have changed.');
     }
@@ -112,8 +112,8 @@ class AbstractPropelSqlExctractorTest extends TestCase
         $reflect = $this->reflect($subject);
 
         $expected = PropelSqlExtractorInterface::DOWN_MIGRATION;
-        $before   = strtoupper(PropelSqlExtractorInterface::DOWN_MIGRATION);
-        $after    = $reflect->_normalizeDirection($before);
+        $before = strtoupper(PropelSqlExtractorInterface::DOWN_MIGRATION);
+        $after = $reflect->_normalizeDirection($before);
 
         $this->assertEquals($expected, $after, 'Direction was not sanitized.');
     }
@@ -145,8 +145,8 @@ class AbstractPropelSqlExctractorTest extends TestCase
         $reflect = $this->reflect($subject);
 
         $direc = uniqid('direction-');
-        $migr  = new stdClass();
-        $code  = uniqid('code-');
+        $migr = new stdClass();
+        $code = uniqid('code-');
         $input = [
             $in1 = uniqid('key-') => uniqid('sql-'),
             $in2 = uniqid('key-') => uniqid('sql-'),
@@ -184,7 +184,7 @@ class AbstractPropelSqlExctractorTest extends TestCase
         $subject = $this->createInstance();
         $reflect = $this->reflect($subject);
 
-        $code      = (string) rand(1000, 9999);
+        $code = (string) rand(1000, 9999);
         $className = sprintf('PropelMigration_%s', $code);
 
         $output = $reflect->_getMigrationClassCode($className);
@@ -202,7 +202,7 @@ class AbstractPropelSqlExctractorTest extends TestCase
         $subject = $this->createInstance();
         $reflect = $this->reflect($subject);
 
-        $code      = rand(1000, 9999);
+        $code = rand(1000, 9999);
         $className = sprintf('Propel_%s_Migration', $code);
 
         $output = $reflect->_getMigrationClassCode($className);
@@ -221,15 +221,15 @@ class AbstractPropelSqlExctractorTest extends TestCase
         $subject = $this->createInstance();
         $reflect = $this->reflect($subject);
 
-        $code    = rand(1000, 9999);
+        $code = rand(1000, 9999);
         $schema1 = uniqid('schema-');
         $schema2 = uniqid('schema-');
 
-        $upSql     = [
+        $upSql = [
             $schema1 => $up1 = uniqid('up-'),
             $schema2 => $up2 = uniqid('up-'),
         ];
-        $downSql   = [
+        $downSql = [
             $schema1 => $down1 = uniqid('down-'),
             $schema2 => $down2 = uniqid('down-'),
         ];
@@ -244,7 +244,7 @@ class AbstractPropelSqlExctractorTest extends TestCase
 
         $this->assertEquals(
             [
-                PropelSqlExtractorInterface::UP_MIGRATION   => $upSql,
+                PropelSqlExtractorInterface::UP_MIGRATION => $upSql,
                 PropelSqlExtractorInterface::DOWN_MIGRATION => $downSql,
             ],
             $reflect->_extract($migration)
