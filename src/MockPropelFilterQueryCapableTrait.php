@@ -34,14 +34,7 @@ trait MockPropelFilterQueryCapableTrait
      */
     protected function _filterMigrationSqlQuery($sql, $direction, $migration, $code)
     {
-        if ($direction !== I::UP_MIGRATION && $direction !== I::DOWN_MIGRATION) {
-            throw $this->_createInvalidArgumentException(
-                $this->__('Argument #2 is not a valid direction'),
-                null,
-                null,
-                $direction
-            );
-        }
+        $direction = $this->_normalizeDirection($direction);
 
         // Add an SQL comment with the code
         $sql = sprintf('# %s', $code) . PHP_EOL . $sql;
@@ -116,4 +109,15 @@ trait MockPropelFilterQueryCapableTrait
      * @return string The translated string.
      */
     abstract protected function __($string, $args = [], $context = null);
+
+    /**
+     * Normalizes the given direction string or string-like object.
+     *
+     * @since [*next-version*]
+     *
+     * @param string|Stringable $direction The direction.
+     *
+     * @return string The normalized direction.
+     */
+    abstract protected function _normalizeDirection($direction);
 }

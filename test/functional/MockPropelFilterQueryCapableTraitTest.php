@@ -30,7 +30,11 @@ class MockPropelFilterQueryCapableTraitTest extends TestCase
         $builder = $this->getMockBuilder(TestSubject::class)
                         ->setMethods(
                             array_merge(
-                                [],
+                                [
+                                    '__',
+                                    '_createInvalidArgumentException',
+                                    '_normalizeDirection',
+                                ],
                                 $methods
                             )
                         );
@@ -38,8 +42,9 @@ class MockPropelFilterQueryCapableTraitTest extends TestCase
         $mock = $builder->getMockForTrait(TestSubject::class);
 
         $mock->method('__')->willReturnArgument(0);
+        $mock->method('_normalizeDirection')->willReturnArgument(0);
         $mock->method('_createInvalidArgumentException')->willReturnCallback(
-            function ($m, $c, $p) {
+            function($m, $c, $p) {
                 return new InvalidArgumentException($m, $c, $p);
             }
         );
