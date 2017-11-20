@@ -129,5 +129,7 @@ class AbstractFilePropelSqlExtractorTest extends TestCase
         $reflect->_writeQueriesToFile($direction, $queries, $migration, $code);
 
         $this->assertFileExists($fullPath, 'Query file does not exist.');
+
+        $vfs->unmount();
     }
 }
