@@ -14,7 +14,7 @@ use Xpmock\TestCase;
  *
  * @since [*next-version*]
  */
-class AbstractPropelSqlExctractorTest extends TestCase
+class AbstractPropelSqlExtractorTest extends TestCase
 {
     /**
      * Creates a new instance of the test subject.
