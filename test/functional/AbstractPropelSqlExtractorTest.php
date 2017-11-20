@@ -34,6 +34,7 @@ class AbstractPropelSqlExtractorTest extends TestCase
                                     '__',
                                     '_createInvalidArgumentException',
                                     '_normalizeString',
+                                    '_normalizeDirection',
                                     '_filterMigrationSqlQuery',
                                     '_finishExtraction',
                                 ],
@@ -49,6 +50,7 @@ class AbstractPropelSqlExtractorTest extends TestCase
             }
         );
         $mock->method('_normalizeString')->willReturnArgument(0);
+        $mock->method('_normalizeDirection')->willReturnArgument(0);
 
         return $mock;
     }
@@ -67,70 +69,6 @@ class AbstractPropelSqlExtractorTest extends TestCase
             $subject,
             'A valid instance of the test subject could not be created.'
         );
-    }
-
-    /**
-     * Tests the direction normalization method with an up direction.
-     *
-     * @since [*next-version*]
-     */
-    public function testNormalizeDirectionUp()
-    {
-        $subject = $this->createInstance();
-        $reflect = $this->reflect($subject);
-
-        $before = PropelSqlExtractorInterface::UP_MIGRATION;
-        $after = $reflect->_normalizeDirection($before);
-
-        $this->assertEquals($before, $after, 'Valid direction should not have changed.');
-    }
-
-    /**
-     * Tests the direction normalization method with a down direction.
-     *
-     * @since [*next-version*]
-     */
-    public function testNormalizeDirectionDown()
-    {
-        $subject = $this->createInstance();
-        $reflect = $this->reflect($subject);
-
-        $before = PropelSqlExtractorInterface::DOWN_MIGRATION;
-        $after = $reflect->_normalizeDirection($before);
-
-        $this->assertEquals($before, $after, 'Valid direction should not have changed.');
-    }
-
-    /**
-     * Tests the direction normalization method's sanitization.
-     *
-     * @since [*next-version*]
-     */
-    public function testNormalizeDirectionSanitized()
-    {
-        $subject = $this->createInstance();
-        $reflect = $this->reflect($subject);
-
-        $expected = PropelSqlExtractorInterface::DOWN_MIGRATION;
-        $before = strtoupper(PropelSqlExtractorInterface::DOWN_MIGRATION);
-        $after = $reflect->_normalizeDirection($before);
-
-        $this->assertEquals($expected, $after, 'Direction was not sanitized.');
-    }
-
-    /**
-     * Tests the direction normalization method with an invalid direction.
-     *
-     * @since [*next-version*]
-     */
-    public function testNormalizeDirectionInvalid()
-    {
-        $subject = $this->createInstance();
-        $reflect = $this->reflect($subject);
-
-        $this->setExpectedException('InvalidArgumentException');
-
-        $reflect->_normalizeDirection(uniqid('up-'));
     }
 
     /**
