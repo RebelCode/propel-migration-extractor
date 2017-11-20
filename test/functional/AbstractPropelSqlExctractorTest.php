@@ -17,13 +17,6 @@ use Xpmock\TestCase;
 class AbstractPropelSqlExctractorTest extends TestCase
 {
     /**
-     * The class name of the test subject.
-     *
-     * @since [*next-version*]
-     */
-    const TEST_SUBJECT_CLASSNAME = AbstractPropelSqlExtractor::class;
-
-    /**
      * Creates a new instance of the test subject.
      *
      * @since [*next-version*]
