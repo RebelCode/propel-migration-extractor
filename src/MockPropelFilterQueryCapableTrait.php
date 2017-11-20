@@ -26,13 +26,14 @@ trait MockPropelFilterQueryCapableTrait
      * @since [*next-version*]
      *
      * @param string|Stringable $sql       The SQL query to filter.
+     * @param string|Stringable $schema    The DB schema ID.
      * @param string|Stringable $direction The direction of the query, either "up" or "down".
      * @param object            $migration The migration instance.
      * @param string|Stringable $code      The migration code.
      *
      * @return string
      */
-    protected function _filterMigrationSqlQuery($sql, $direction, $migration, $code)
+    protected function _filterMigrationSqlQuery($sql, $schema, $direction, $migration, $code)
     {
         $direction = $this->_normalizeDirection($direction);
 

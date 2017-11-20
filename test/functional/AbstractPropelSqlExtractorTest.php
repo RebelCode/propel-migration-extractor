@@ -95,10 +95,10 @@ class AbstractPropelSqlExtractorTest extends TestCase
         $subject->expects($this->exactly(4))
                 ->method('_filterMigrationSqlQuery')
                 ->withConsecutive(
-                    [$input[$in1], $direc, $migr, $code],
-                    [$input[$in2], $direc, $migr, $code],
-                    [$input[$in3], $direc, $migr, $code],
-                    [$input[$in4], $direc, $migr, $code]
+                    [$input[$in1], $in1, $direc, $migr, $code],
+                    [$input[$in2], $in2, $direc, $migr, $code],
+                    [$input[$in3], $in3, $direc, $migr, $code],
+                    [$input[$in4], $in4, $direc, $migr, $code]
                 )
                 ->willReturnOnConsecutiveCalls(
                     $input[$in1],

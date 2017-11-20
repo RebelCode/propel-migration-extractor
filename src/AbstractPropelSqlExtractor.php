@@ -97,7 +97,7 @@ abstract class AbstractPropelSqlExtractor
         $result = [];
 
         foreach ($sqlArray as $_key => $_sql) {
-            $_filtered = $this->_filterMigrationSqlQuery($_sql, $direction, $migration, $code);
+            $_filtered = $this->_filterMigrationSqlQuery($_sql, $_key, $direction, $migration, $code);
 
             if ($_filtered !== null) {
                 $result[$_key] = $this->_normalizeString($_filtered);
@@ -139,13 +139,14 @@ abstract class AbstractPropelSqlExtractor
      * @since [*next-version*]
      *
      * @param string|Stringable $sql       The SQL query to filter.
+     * @param string|Stringable $schema    The DB schema ID.
      * @param string|Stringable $direction The direction of the query, either "up" or "down".
      * @param object            $migration The migration instance.
      * @param string|Stringable $code      The migration code.
      *
      * @return string|Stringable The filtered SQL query.
      */
-    abstract protected function _filterMigrationSqlQuery($sql, $direction, $migration, $code);
+    abstract protected function _filterMigrationSqlQuery($sql, $schema, $direction, $migration, $code);
 
     /**
      * Performs final operations with the extracted SQL queries.

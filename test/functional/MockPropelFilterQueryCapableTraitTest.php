@@ -84,11 +84,12 @@ class MockPropelFilterQueryCapableTraitTest extends TestCase
         $addedSql = uniqid('added-');
         $migration = new stdClass();
         $code = uniqid('code-');
+        $schema = uniqid('schema-');
 
         $subject->method('_getUpPropelMigrationMockSql')
                 ->willReturn($addedSql);
 
-        $output = $reflect->_filterMigrationSqlQuery($originalSql, $direction, $migration, $code);
+        $output = $reflect->_filterMigrationSqlQuery($originalSql, $schema, $direction, $migration, $code);
 
         $this->assertContains($originalSql, $output);
         $this->assertContains($addedSql, $output);
@@ -110,11 +111,12 @@ class MockPropelFilterQueryCapableTraitTest extends TestCase
         $addedSql = uniqid('added-');
         $migration = new stdClass();
         $code = uniqid('code-');
+        $schema = uniqid('schema-');
 
         $subject->method('_getDownPropelMigrationMockSql')
                 ->willReturn($addedSql);
 
-        $output = $reflect->_filterMigrationSqlQuery($originalSql, $direction, $migration, $code);
+        $output = $reflect->_filterMigrationSqlQuery($originalSql, $schema, $direction, $migration, $code);
 
         $this->assertContains($originalSql, $output);
         $this->assertContains($addedSql, $output);
