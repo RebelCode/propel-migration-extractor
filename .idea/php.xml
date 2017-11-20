@@ -42,6 +42,12 @@
       <path value="$PROJECT_DIR$/vendor/psr/log" />
       <path value="$PROJECT_DIR$/vendor/dhii/stringable-interface" />
       <path value="$PROJECT_DIR$/vendor/adlawson/vfs" />
+      <path value="$PROJECT_DIR$/vendor/dhii/normalization-helper-base" />
+      <path value="$PROJECT_DIR$/vendor/dhii/exception-helper-base" />
+      <path value="$PROJECT_DIR$/vendor/dhii/exception" />
+      <path value="$PROJECT_DIR$/vendor/dhii/i18n-interface" />
+      <path value="$PROJECT_DIR$/vendor/dhii/exception-interface" />
+      <path value="$PROJECT_DIR$/vendor/dhii/i18n-helper-base" />
     </include_path>
   </component>
   <component name="PhpUnit">
