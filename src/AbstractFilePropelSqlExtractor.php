@@ -38,9 +38,15 @@ abstract class AbstractFilePropelSqlExtractor extends AbstractPropelSqlExtractor
         foreach ($queries as $_schema => $_query) {
             $filePath = $this->_getSqlFilePath($direction, $_schema, $_query, $migration, $code);
 
-            if ($filePath !== null) {
-                file_put_contents($filePath, $_query);
+            if ($filePath === null) {
+                continue;
             }
+
+            if (!is_dir($dir = dirname($filePath))) {
+                mkdir($dir, 0777, true);
+            }
+
+            file_put_contents($filePath, $_query);
         }
     }
 

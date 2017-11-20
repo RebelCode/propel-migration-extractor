@@ -117,7 +117,7 @@ class AbstractFilePropelSqlExtractorTest extends TestCase
         $schema = uniqid('schema-');
         $direction = uniqid('direction-');
         $queries = [$schema => uniqid('up-')];
-        $fullPath = sprintf('vfs://%1$s/%2$s.sql', $dirName, $direction);
+        $fullPath = sprintf('vfs://%1$s/%2$s/%3$s.sql', $dirName, $schema, $direction);
         $migration = new stdClass();
         $code = rand(1000, 9999);
 
