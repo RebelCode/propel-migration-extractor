@@ -99,6 +99,11 @@ class ByJgPropelSqlExtractorTest extends TestCase
         );
     }
 
+    /**
+     * Tests the extraction method to assert whether the extracted SQL is correctly stored in files.
+     *
+     * @since [*next-version*]
+     */
     public function testExtract()
     {
         $this->vfs->get('/')->add('migrations', new Directory());
