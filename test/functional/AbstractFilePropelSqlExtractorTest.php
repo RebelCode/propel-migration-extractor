@@ -18,6 +18,36 @@ use Xpmock\TestCase;
 class AbstractFilePropelSqlExtractorTest extends TestCase
 {
     /**
+     * The virtual file system instance.
+     *
+     * @since [*next-version*]
+     *
+     * @var FileSystem
+     */
+    protected $vfs;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    public function setUp()
+    {
+        $this->vfs = FileSystem::factory('vfs://');
+        $this->vfs->mount();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    public function tearDown()
+    {
+        $this->vfs->unmount();
+    }
+
+    /**
      * Creates a new instance of the test subject.
      *
      * @since [*next-version*]
@@ -41,24 +71,6 @@ class AbstractFilePropelSqlExtractorTest extends TestCase
         $mock = $builder->getMockForAbstractClass();
 
         return $mock;
-    }
-
-    /**
-     * Creates a virtual file system.
-     *
-     * @since [*next-version*]
-     *
-     * @param string $dir The name of the root directory.
-     *
-     * @return FileSystem The created virtual file system.
-     */
-    public function createVfs($dir)
-    {
-        $vfs = FileSystem::factory('vfs://');
-        $vfs->mount();
-        $vfs->get('/')->add($dir, new Directory());
-
-        return $vfs;
     }
 
     /**
@@ -124,12 +136,10 @@ class AbstractFilePropelSqlExtractorTest extends TestCase
         $subject->method('_getSqlFilePath')
                 ->willReturn($fullPath);
 
-        $vfs = $this->createVfs($dirName);
+        $this->vfs->get('/')->add($dirName, new Directory());
 
         $reflect->_writeQueriesToFile($direction, $queries, $migration, $code);
 
         $this->assertFileExists($fullPath, 'Query file does not exist.');
-
-        $vfs->unmount();
     }
 }

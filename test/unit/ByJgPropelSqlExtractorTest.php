@@ -3,10 +3,10 @@
 namespace RebelCode\Migrations\UnitTest;
 
 use RebelCode\Migrations\ByjgPropelSqlExtractor;
+use RebelCode\Migrations\ByJgPropelSqlExtractor as TestSubject;
 use Vfs\FileSystem;
 use Vfs\Node\Directory;
 use Xpmock\TestCase;
-use RebelCode\Migrations\ByJgPropelSqlExtractor as TestSubject;
 
 /**
  * Tests {@see TestSubject}.
@@ -15,6 +15,36 @@ use RebelCode\Migrations\ByJgPropelSqlExtractor as TestSubject;
  */
 class ByJgPropelSqlExtractorTest extends TestCase
 {
+    /**
+     * The virtual file system instance.
+     *
+     * @since [*next-version*]
+     *
+     * @var FileSystem
+     */
+    protected $vfs;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    public function setUp()
+    {
+        $this->vfs = FileSystem::factory('vfs://');
+        $this->vfs->mount();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    public function tearDown()
+    {
+        $this->vfs->unmount();
+    }
+
     /**
      * Creates a new instance of the test subject.
      *
@@ -27,24 +57,6 @@ class ByJgPropelSqlExtractorTest extends TestCase
     public function createInstance($rootDir = null)
     {
         return new ByjgPropelSqlExtractor($rootDir);
-    }
-
-    /**
-     * Creates a virtual file system.
-     *
-     * @since [*next-version*]
-     *
-     * @param string $dir The name of the root directory.
-     *
-     * @return FileSystem The created virtual file system.
-     */
-    public function createVfs($dir)
-    {
-        $vfs = FileSystem::factory('vfs://');
-        $vfs->mount();
-        $vfs->get('/')->add($dir, new Directory());
-
-        return $vfs;
     }
 
     /**
@@ -89,7 +101,7 @@ class ByJgPropelSqlExtractorTest extends TestCase
 
     public function testExtract()
     {
-        $this->createVfs('migrations');
+        $this->vfs->get('/')->add('migrations', new Directory());
 
         $subject = $this->createInstance('vfs://migrations/');
         $reflect = $this->reflect($subject);
