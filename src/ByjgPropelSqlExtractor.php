@@ -54,7 +54,7 @@ class ByjgPropelSqlExtractor extends AbstractFilePropelSqlExtractor implements P
      *
      * @since [*next-version*]
      */
-    const DIR_DOWN = 'up';
+    const DIR_DOWN = 'down';
 
     /**
      * The root directory.
