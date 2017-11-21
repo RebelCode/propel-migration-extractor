@@ -8,11 +8,12 @@ use Dhii\Util\Normalization\NormalizeStringCapableTrait;
 use Dhii\Util\String\StringableInterface as Stringable;
 
 /**
- * A Propel SQL extractor that stores the extracted SQL in files that can be used by ByJg's migration library.
+ * A Propel SQL extractor that stores the extracted SQL in files that can be used by RebelCode and ByJg migration
+ * libraries.
  *
  * @since [*next-version*]
  */
-class ByjgPropelSqlExtractor extends AbstractFilePropelSqlExtractor implements PropelSqlExtractorInterface
+class PropelSqlExtractor extends AbstractFilePropelSqlExtractor implements PropelSqlExtractorInterface
 {
     /*
      * Filters extracted SQL queries to add SQL that simulates Propel migration.
@@ -119,7 +120,7 @@ class ByjgPropelSqlExtractor extends AbstractFilePropelSqlExtractor implements P
     protected function _getSqlFilePath($direction, $schema, $sql, $migration, $code)
     {
         $rootDirectory = rtrim($this->_getRootDir(), '\\/');
-        $subDirectory  = $this->_getDirectionDirectoryName($direction);
+        $subDirectory = $this->_getDirectionDirectoryName($direction);
         $fullDirectory = implode(
             DIRECTORY_SEPARATOR,
             [$rootDirectory, $schema, $subDirectory]
@@ -128,11 +129,11 @@ class ByjgPropelSqlExtractor extends AbstractFilePropelSqlExtractor implements P
         $fileCounter = 0;
 
         do {
-            ++$fileCounter;
+            ++ $fileCounter;
 
-            $filename   = $fullDirectory . DIRECTORY_SEPARATOR . sprintf('%1$05d.sql', $fileCounter);
+            $filename = $fullDirectory . DIRECTORY_SEPARATOR . sprintf('%1$05d.sql', $fileCounter);
             $fileExists = file_exists($filename);
-            $hasCode    = $fileExists && strpos(file_get_contents($filename), $code) !== false;
+            $hasCode = $fileExists && strpos(file_get_contents($filename), $code) !== false;
         } while ($fileExists && !$hasCode);
 
         return $hasCode

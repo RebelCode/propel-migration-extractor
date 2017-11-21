@@ -2,8 +2,8 @@
 
 namespace RebelCode\Migrations\UnitTest;
 
-use RebelCode\Migrations\ByjgPropelSqlExtractor;
-use RebelCode\Migrations\ByJgPropelSqlExtractor as TestSubject;
+use RebelCode\Migrations\PropelSqlExtractor;
+use RebelCode\Migrations\PropelSqlExtractor as TestSubject;
 use Vfs\FileSystem;
 use Vfs\Node\Directory;
 use Xpmock\TestCase;
@@ -13,7 +13,7 @@ use Xpmock\TestCase;
  *
  * @since [*next-version*]
  */
-class ByJgPropelSqlExtractorTest extends TestCase
+class PropelSqlExtractorTest extends TestCase
 {
     /**
      * The virtual file system instance.
@@ -56,7 +56,7 @@ class ByJgPropelSqlExtractorTest extends TestCase
      */
     public function createInstance($rootDir = null)
     {
-        return new ByjgPropelSqlExtractor($rootDir);
+        return new PropelSqlExtractor($rootDir);
     }
 
     /**
