@@ -108,32 +108,6 @@ abstract class AbstractPropelSqlExtractor
     }
 
     /**
-     * Normalizes the given direction string or string-like object.
-     *
-     * @since [*next-version*]
-     *
-     * @param string|Stringable $direction The direction.
-     *
-     * @return string The normalized direction.
-     */
-    protected function _normalizeDirection($direction)
-    {
-        $direction = $this->_normalizeString($direction);
-        $direction = strtolower($direction);
-
-        if ($direction !== I::UP_MIGRATION && $direction !== I::DOWN_MIGRATION) {
-            throw $this->_createInvalidArgumentException(
-                $this->__('Argument is not a valid migration direction'),
-                null,
-                null,
-                $direction
-            );
-        }
-
-        return $direction;
-    }
-
-    /**
      * Filters a migration SQL query.
      *
      * @since [*next-version*]

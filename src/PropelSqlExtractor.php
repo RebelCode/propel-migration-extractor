@@ -30,6 +30,13 @@ class PropelSqlExtractor extends AbstractFilePropelSqlExtractor implements Prope
     use NormalizeStringCapableTrait;
 
     /*
+     * Provides migration direction normalization capabilities.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeDirectionCapableTrait;
+
+    /*
      * Provides functionality for creating invalid argument exception instances.
      *
      * @since [*next-version*]
