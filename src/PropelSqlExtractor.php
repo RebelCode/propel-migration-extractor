@@ -122,6 +122,13 @@ class PropelSqlExtractor extends AbstractFilePropelSqlExtractor implements Prope
     /**
      * {@inheritdoc}
      *
+     * This implementation deduces the file path by continuously checking if a `0000n.sql` file exists in a directory,
+     * for n > 0 and incrementing n if the file already exists. Once a file is not found for a given n value, the
+     * path of that file is returned.
+     *
+     * The directory where files are scanned, relative to the root directory configured for this instance, is
+     * dependent on the DB schema and the direction of the migration as follows: <root>/<schema>/<direction>
+     *
      * @since [*next-version*]
      */
     protected function _getSqlFilePath($direction, $schema, $sql, $migration, $code)
