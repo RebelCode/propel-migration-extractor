@@ -20,7 +20,7 @@ abstract class AbstractPropelSqlExtractor
      *
      * @since [*next-version*]
      *
-     * @param string|Stringable $migration The path to the propel migration class file.
+     * @param object $migration The Propel migration instance.
      *
      * @return array An array containing two keys mapping to sub-arrays of up and down SQL queries, keyed by schema ID.
      *               The keys of the returned array are {@link K_UP_SQL} and {@link K_DOWN_SQL}.
