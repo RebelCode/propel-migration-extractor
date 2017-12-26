@@ -16,7 +16,7 @@ use Traversable;
 abstract class AbstractPropelSqlExtractor
 {
     /**
-     * Extracts the up and down SQL queries for a propel migration found at a given path.
+     * Extracts the up and down SQL queries for a given propel migration object.
      *
      * @since [*next-version*]
      *
